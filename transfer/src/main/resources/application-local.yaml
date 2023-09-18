@@ -17,10 +17,11 @@ spring:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
     password: password
+    
   liquibase:
     default-schema: transfer
     change-log: db/changelog/db.changelog-master.yaml
     enabled: true
-    drop-first: false
+    drop-first: true
   application:
     name: transfer-app

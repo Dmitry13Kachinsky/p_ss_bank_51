@@ -1,33 +1,34 @@
 package com.bank.transfer.entity;
 
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Data
+@Builder
 @NoArgsConstructor
-@Table(name = "account_transfer")
+@AllArgsConstructor
+@Table(schema ="transfer", name = "account_transfer")
 public class AccountTransfer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NonNull
-    @Column(name="id")
+    @Column(name="id", nullable = false)
     Long Id;
 
-    @Column(name = "account_number")
-    Long accNumber;
 
-    @Column(name="amount")
+    @Column(name = "account_number", unique = true)
+    Long accountNumber;
+
+    @Column(name="amount", nullable = false)
     Double amount;
 
     @Column(name="purpose")
     String purpose;
 
-    @Column(name = "account_details_id")
-    Long accDetailsId;
+    @Column(name = "account_details_id", nullable = false)
+    Long accountDetailsId;
+
 }

@@ -6,26 +6,27 @@ import javax.persistence.*;
 
 @Entity
 @Data
+@Builder
 @NoArgsConstructor
-@Table(name = "phone_transfer")
+@AllArgsConstructor
+@Table(schema ="transfer", name ="phone_transfer")
 public class PhoneTransfer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NonNull
-    @Column(name="id")
+    @Column(name="id", nullable = false)
     Long id;
 
-    @Column(name="phone_number")
+    @Column(name="phone_number", nullable = false)
     Long phoneNumber;
 
-    @Column(name="amount")
+    @Column(name="amount", nullable = false)
     Double amount;
 
     @Column(name="purpose")
     String purpose;
 
-    @Column(name="account_details_id")
-    Long accDetailsId;
+    @Column(name="account_details_id", nullable = false)
+    Long accountDetailsId;
 
 }

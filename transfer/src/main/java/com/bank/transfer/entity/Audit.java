@@ -1,46 +1,46 @@
 package com.bank.transfer.entity;
 
-
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Timestamp;
+
 
 @Entity
-@NoArgsConstructor
 @Data
-@Table(name = "audit")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(schema ="transfer", name = "audit")
 public class Audit {
 
-    @javax.persistence.Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NonNull
-    @Column(name="id")
+    @Column(name="id", nullable = false)
     Long Id;
 
-    @Column(name = "entity_type")
+    @Column(name = "entity_type", nullable = false)
     String entityType;
 
-    @Column(name="operation_type")
+    @Column(name="operation_type", nullable = false)
     String operation;
 
-    @Column(name="created_by")
+    @Column(name="created_by", nullable = false)
     String createdBy;
 
     @Column(name="modified_by")
     String modifiedBy;
 
-    @Column(name = "created_at")
-    Date createdAt;
+    @Column(name = "created_at", nullable = false)
+    Timestamp createdAt;
 
     @Column(name = "modified_at")
-    Date modifiedAt;
+    Timestamp modifiedAt;
 
     @Column(name="new_entity_json")
     String newEntityJson;
 
-    @Column(name="entity_json")
+    @Column(name="entity_json", nullable = false)
     String entityJson;
 }
