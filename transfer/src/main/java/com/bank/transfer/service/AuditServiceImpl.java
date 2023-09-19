@@ -26,39 +26,6 @@ public class AuditServiceImpl implements AuditService {
         return auditRepository.findAll();
     }
 
-    @Override
-    public Audit findById(Long id) {
-        return auditRepository.findById(id).orElseThrow(()
-                -> new TransferNotFoundException("Note in Audit not found"));
-    }
-
-    @Override
-    @Transactional
-    public Long addTransferAudit(AuditDto auditDto) {
-        Audit audit = mapToAudit(auditDto);
-        return auditRepository.save(audit).getId();
-    }
-
-    @Override
-    @Transactional
-    public void updateTransferAudit(Long id, AuditDto auditDto) {
-        if (auditRepository.findById(id) == null) {
-            throw new TransferNotFoundException("Note in Audit not found");
-        }
-        Audit audit = mapToAudit(auditDto);
-        audit.setId(id);
-        auditRepository.save(audit);
-    }
-
-    @Override
-    @Transactional
-    public void deleteTransferAudit(Long id) {
-        if (auditRepository.findById(id) == null) {
-            throw new TransferNotFoundException("Such Account Transfer does not exist!");
-        }
-        auditRepository.deleteById(id);
-
-    }
 
     private Audit mapToAudit(AuditDto auditDto) {
         return Audit.builder()
