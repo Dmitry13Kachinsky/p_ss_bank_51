@@ -11,7 +11,7 @@ public class AuditDto {
 
     String entityType;
 
-    String operation;
+    String operationType;
 
     String createdBy;
 

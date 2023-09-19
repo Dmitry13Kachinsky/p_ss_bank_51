@@ -24,7 +24,7 @@ public class Audit {
     String entityType;
 
     @Column(name="operation_type", nullable = false)
-    String operation;
+    String operationType;
 
     @Column(name="created_by", nullable = false)
     String createdBy;
