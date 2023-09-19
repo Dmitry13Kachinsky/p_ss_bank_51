@@ -16,7 +16,6 @@ public class Audit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NonNull
     @Column(name="id", nullable = false)
     Long Id;
 

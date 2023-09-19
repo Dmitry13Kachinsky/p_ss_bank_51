@@ -25,3 +25,8 @@ spring:
     drop-first: true
   application:
     name: transfer-app
+springdoc:
+  show-actuator: false
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
