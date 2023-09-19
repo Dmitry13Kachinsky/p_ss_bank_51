@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 
 @Data
 @AllArgsConstructor
-public class TransferException {
+public class TransferException extends Throwable {
 
     private final String message;
     private final Throwable throwable;

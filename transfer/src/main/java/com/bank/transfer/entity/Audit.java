@@ -20,7 +20,7 @@ public class Audit {
     @Column(name="id", nullable = false)
     Long Id;
 
-    @Column(name = "entity_type", nullable = false)
+    @Column(name = "entity_type", nullable = false, length = 40)
     String entityType;
 
     @Column(name="operation_type", nullable = false)
