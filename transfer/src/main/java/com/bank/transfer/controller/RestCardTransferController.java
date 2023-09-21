@@ -1,7 +1,6 @@
 package com.bank.transfer.controller;
 
 import com.bank.transfer.dto.CardTransferDto;
-import com.bank.transfer.entity.CardTransfer;
 import com.bank.transfer.service.CardTransferService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -32,8 +31,8 @@ public class RestCardTransferController {
     @Operation(summary = "Gets list of all Card transfers")
     @ApiResponse(responseCode = "200", description = "The list of all Card transfers have gotten successful")
     @ApiResponse(responseCode = "404", description = "Bad request to get all Card transfers")
-    public ResponseEntity<List<CardTransfer>> showAllCardTransfers() {
-        List<CardTransfer> cardTransfer = cardTransferService.findAllCardTransfers();
+    public ResponseEntity<List<CardTransferDto>> showAllCardTransfers() {
+        List<CardTransferDto> cardTransfer = cardTransferService.findAllCardTransfers();
         logger.log(Level.INFO, "Got the list of Card Transfers.");
         return new ResponseEntity<>(cardTransfer, HttpStatus.OK);
     }
@@ -52,9 +51,9 @@ public class RestCardTransferController {
     @Operation(summary = "Shows Card transfer by id")
     @ApiResponse(responseCode = "200", description = "Card transfers have been successful showed")
     @ApiResponse(responseCode = "404", description = "Bad request to get Card transfer by id")
-    public ResponseEntity<CardTransfer> showEachCardTransferById(@PathVariable Long id) {
+    public ResponseEntity<CardTransferDto> showEachCardTransferById(@PathVariable Long id) {
 
-        CardTransfer cardTransfer = cardTransferService.findById(id);
+        CardTransferDto cardTransfer = cardTransferService.findById(id);
         logger.log(Level.INFO, "Card Transfer with id: " + id + " showed.");
         return new ResponseEntity<>(cardTransfer, HttpStatus.OK);
     }

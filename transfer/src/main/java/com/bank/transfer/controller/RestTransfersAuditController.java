@@ -1,6 +1,6 @@
 package com.bank.transfer.controller;
 
-import com.bank.transfer.entity.Audit;
+import com.bank.transfer.dto.AuditDto;
 import com.bank.transfer.service.AuditService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -32,12 +32,51 @@ public class RestTransfersAuditController {
     @Operation(summary = "Gets list of Audit of transfers")
     @ApiResponse(responseCode = "200", description = "Audit-list of transfers have gotten successful")
     @ApiResponse(responseCode = "404", description = "Bad request to get Audit-list of transfers")
-    public ResponseEntity<List<Audit>> showAllInfoAboutTransfers() {
-        List<Audit> audits = auditService.findAllTransfers();
+    public ResponseEntity<List<AuditDto>> showAllInfoAboutTransfers() {
+        List<AuditDto> audits = auditService.findAllTransfers();
         logger.log(Level.INFO, "Got the list of Transfers Audit");
         return new ResponseEntity<>(audits, HttpStatus.OK);
     }
 
+    @PostMapping("/index")
+    @Operation(summary = "Adds new Audit transfer")
+    @ApiResponse(responseCode = "200", description = "Audit transfer was added successful")
+    @ApiResponse(responseCode = "404", description = "Bad request for adding new Audit of transfer")
+    public ResponseEntity<HttpStatus> addNewTransferAuditPost(@RequestBody AuditDto auditDto) {
+        auditService.addTransferAudit(auditDto);
+        logger.log(Level.INFO, "Audit post successfully added");
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/index/{id}")
+    @Operation(summary = "Shows Audit transfer by id")
+    @ApiResponse(responseCode = "200", description = "Audit of transfer have been showed successful")
+    @ApiResponse(responseCode = "404", description = "Bad request to get Audit of transfer by id")
+    public ResponseEntity<AuditDto> showEachTransfersAuditPost (@PathVariable Long id) {
+        AuditDto audit = auditService.findById(id);
+        logger.log(Level.INFO, "Transfer Audit post with id: " + id + " showed");
+        return new ResponseEntity<>(audit, HttpStatus.OK);
+    }
+
+    @PatchMapping("/index/{id}")
+    @Operation(summary = "Updates Audit of transfer by id")
+    @ApiResponse(responseCode = "200", description = "Audit of transfer have been updated successful")
+    @ApiResponse(responseCode = "404", description = "Bad request to update Audit of transfer by id")
+    public ResponseEntity<HttpStatus> updateTransferAuditPost (@PathVariable Long id, @RequestBody AuditDto auditDto) {
+        auditService.updateTransferAudit(id, auditDto);
+        logger.log(Level.INFO, "Transfer Audit post with id: " + id + " successfully updated");
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/index/{id}")
+    @Operation(summary = "Deletes Audit of transfer by id")
+    @ApiResponse(responseCode = "200", description = "Audit transfer have been deleted successful")
+    @ApiResponse(responseCode = "404", description = "Bad request to delete Audit of transfer by id")
+    public ResponseEntity<HttpStatus> deleteTransferAuditPost (@PathVariable Long id) {
+        auditService.deleteTransferAudit(id);
+        logger.log(Level.INFO, "Transfer Audit post with id: " + id + " successfully deleted");
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 
 }

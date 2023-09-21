@@ -1,15 +1,14 @@
 package com.bank.transfer.service;
 
 import com.bank.transfer.dto.AccountTransferDto;
-import com.bank.transfer.entity.AccountTransfer;
 
 import java.util.List;
 
 
 public interface AccountTransferService {
-    List<AccountTransfer> findAllAccountTransfers();
+    List<AccountTransferDto> findAllAccountTransfers();
 
-    AccountTransfer findById(Long id);
+    AccountTransferDto findById(Long id);
 
     Long addAccountTransfer(AccountTransferDto transferDto);
 

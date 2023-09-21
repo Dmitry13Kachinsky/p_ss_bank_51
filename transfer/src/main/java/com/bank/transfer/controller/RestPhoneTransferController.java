@@ -1,7 +1,6 @@
 package com.bank.transfer.controller;
 
 import com.bank.transfer.dto.PhoneTransferDto;
-import com.bank.transfer.entity.PhoneTransfer;
 import com.bank.transfer.service.PhoneTransferService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -33,8 +32,8 @@ public class RestPhoneTransferController {
     @Operation(summary = "Gets list of all Phone transfers")
     @ApiResponse(responseCode = "200", description = "The list of all Phone transfers have gotten successful")
     @ApiResponse(responseCode = "404", description = "Bad request to get all Phone transfers")
-    public ResponseEntity<List<PhoneTransfer>> showAllPhoneTransfers() {
-        List<PhoneTransfer> phoneTransfers = phoneTransferService.findAllPhoneTransfers();
+    public ResponseEntity<List<PhoneTransferDto>> showAllPhoneTransfers() {
+        List<PhoneTransferDto> phoneTransfers = phoneTransferService.findAllPhoneTransfers();
         logger.log(Level.INFO, "Got the list of all Phone Transfers");
         return new ResponseEntity<>(phoneTransfers, HttpStatus.OK);
     }
@@ -53,8 +52,8 @@ public class RestPhoneTransferController {
     @Operation(summary = "Shows Phone transfer by id")
     @ApiResponse(responseCode = "200", description = "Phone transfers have been showed successful")
     @ApiResponse(responseCode = "404", description = "Bad request to get Phone transfer by id")
-    public ResponseEntity<PhoneTransfer> showEachPhoneTransferById(@PathVariable Long id) {
-        PhoneTransfer phoneTransfer = phoneTransferService.findById(id);
+    public ResponseEntity<PhoneTransferDto> showEachPhoneTransferById(@PathVariable Long id) {
+        PhoneTransferDto phoneTransfer = phoneTransferService.findById(id);
         logger.log(Level.INFO, "Phone transfer with id: " + id + " showed.");
         return new ResponseEntity<>(phoneTransfer, HttpStatus.OK);
     }

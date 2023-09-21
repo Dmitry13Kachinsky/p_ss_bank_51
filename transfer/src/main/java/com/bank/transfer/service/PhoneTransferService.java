@@ -6,9 +6,9 @@ import com.bank.transfer.entity.PhoneTransfer;
 import java.util.List;
 
 public interface PhoneTransferService {
-    List<PhoneTransfer> findAllPhoneTransfers();
+    List<PhoneTransferDto> findAllPhoneTransfers();
 
-    PhoneTransfer findById(Long id);
+    PhoneTransferDto findById(Long id);
 
     Long addPhoneTransfer(PhoneTransferDto transferDto);
 

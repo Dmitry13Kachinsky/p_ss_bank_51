@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface CardTransferService {
 
-    List<CardTransfer> findAllCardTransfers();
+    List<CardTransferDto> findAllCardTransfers();
 
-    CardTransfer findById(Long id);
+    CardTransferDto findById(Long id);
 
     Long addCardTransfer(CardTransferDto transferDto);
 

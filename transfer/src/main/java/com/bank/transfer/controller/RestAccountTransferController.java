@@ -1,7 +1,6 @@
 package com.bank.transfer.controller;
 
 import com.bank.transfer.dto.AccountTransferDto;
-import com.bank.transfer.entity.AccountTransfer;
 import com.bank.transfer.service.AccountTransferService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -33,9 +32,9 @@ public class RestAccountTransferController {
     @Operation(summary = "Gets list of all Account transfers")
     @ApiResponse(responseCode = "200", description = "The list of all Account transfers have gotten successful")
     @ApiResponse(responseCode = "404", description = "Bad request to get all Account transfers")
-    public ResponseEntity<List<AccountTransfer>> showAllAccountTransfers() {
+    public ResponseEntity<List<AccountTransferDto>> showAllAccountTransfers() {
 
-        List<AccountTransfer> accountTransfers = accountTransferService.findAllAccountTransfers();
+        List<AccountTransferDto> accountTransfers = accountTransferService.findAllAccountTransfers();
         logger.log(Level.INFO, "Got the list of Account transfers.");
         return new ResponseEntity<>(accountTransfers, HttpStatus.OK);
     }
@@ -56,9 +55,9 @@ public class RestAccountTransferController {
     @Operation(summary = "Shows Account transfer by id")
     @ApiResponse(responseCode = "200", description = "Account transfers have been showed successful")
     @ApiResponse(responseCode = "404", description = "Bad request to get Account transfer by id")
-    public ResponseEntity<AccountTransfer> showEachAccountTransferById(@PathVariable Long id) {
+    public ResponseEntity<AccountTransferDto> showEachAccountTransferById(@PathVariable Long id) {
 
-        AccountTransfer transfer = accountTransferService.findById(id);
+        AccountTransferDto transfer = accountTransferService.findById(id);
         logger.log(Level.INFO, "Account Transfer with id: " + id + " showed.");
         return new ResponseEntity<>(transfer, HttpStatus.OK);
     }

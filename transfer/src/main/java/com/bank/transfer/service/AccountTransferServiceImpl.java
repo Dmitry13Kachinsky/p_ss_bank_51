@@ -3,43 +3,51 @@ package com.bank.transfer.service;
 import com.bank.transfer.dto.AccountTransferDto;
 import com.bank.transfer.entity.AccountTransfer;
 import com.bank.transfer.exception.TransferNotFoundException;
+import com.bank.transfer.mapper.AccountTransferMapper;
 import com.bank.transfer.repository.AccountTransferRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
 public class AccountTransferServiceImpl implements AccountTransferService {
 
-    private AccountTransferRepository accountTransferRepository;
+    private final AccountTransferRepository accountTransferRepository;
+    private final AccountTransferMapper accountTransferMapper;
 
     @Autowired
-    public AccountTransferServiceImpl(AccountTransferRepository accountTransferRepository) {
+    public AccountTransferServiceImpl(AccountTransferRepository accountTransferRepository, AccountTransferMapper accountTransferMapper) {
         this.accountTransferRepository = accountTransferRepository;
+        this.accountTransferMapper = accountTransferMapper;
     }
+
 
     @Override
     @Transactional
     public Long addAccountTransfer(AccountTransferDto transferDto) {
-        AccountTransfer transfer = mapToAccountTransfer(transferDto);
+        AccountTransfer transfer = accountTransferMapper.mapToAccountTransfer(transferDto);
         return accountTransferRepository.save(transfer).getId();
 
     }
 
     @Override
-    public List<AccountTransfer> findAllAccountTransfers() {
+    public List<AccountTransferDto> findAllAccountTransfers() {
 
-        return accountTransferRepository.findAll();
+        return accountTransferRepository.findAll().stream()
+                .map(AccountTransferMapper::mapToAccountTransferDto).collect(Collectors.toList());
     }
 
     @Override
-    public AccountTransfer findById(Long id) {
+    public AccountTransferDto findById(Long id) {
 
-        return accountTransferRepository.findById(id).orElseThrow(()
-                -> new TransferNotFoundException("Account Transfer not found"));
+        return AccountTransferMapper.mapToAccountTransferDto(
+                accountTransferRepository.findById(id)
+                .orElseThrow(()
+                -> new TransferNotFoundException("Account Transfer not found")));
     }
 
     @Override
@@ -48,7 +56,7 @@ public class AccountTransferServiceImpl implements AccountTransferService {
         if (accountTransferRepository.findById(id) == null) {
             throw new TransferNotFoundException("Account Transfer not found");
         }
-        AccountTransfer transfer = mapToAccountTransfer(transferDto);
+        AccountTransfer transfer = accountTransferMapper.mapToAccountTransfer(transferDto);
         transfer.setId(id);
         accountTransferRepository.save(transfer);
 
@@ -64,13 +72,5 @@ public class AccountTransferServiceImpl implements AccountTransferService {
 
     }
 
-    private AccountTransfer mapToAccountTransfer(AccountTransferDto transferDto) {
-        return AccountTransfer.builder()
-                .accountNumber(transferDto.getAccountNumber())
-                .amount(transferDto.getAmount())
-                .purpose(transferDto.getPurpose())
-                .accountDetailsId(transferDto.getAccountDetailsId())
-                .build();
 
-    }
 }

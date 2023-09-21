@@ -4,27 +4,13 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 
 
 @Aspect
 @Component
-public class LoggingAspect {
-
-    @Pointcut("execution(* com.bank.transfer.service.AccountTransferServiceImpl.*(..))")
-    private void accountTransferMethods(){}
-
-    @Pointcut("execution(* com.bank.transfer.service.CardTransferServiceImpl.*(..))")
-    private void cardTransferMethods() {}
-
-    @Pointcut("execution(* com.bank.transfer.service.PhoneTransferServiceImpl.*(..))")
-    private void phoneTransferMethods() {}
-
-    @Pointcut("execution(* com.bank.transfer.service.AuditServiceImpl.*(..))")
-    private void auditMethods() {}
-
+public class LoggingAspect extends AspectPointcut {
 
 
     @Before("accountTransferMethods()")
