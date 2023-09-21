@@ -1,7 +1,6 @@
 package com.bank.transfer.service;
 
 import com.bank.transfer.dto.CardTransferDto;
-
 import java.util.List;
 
 public interface CardTransferService {

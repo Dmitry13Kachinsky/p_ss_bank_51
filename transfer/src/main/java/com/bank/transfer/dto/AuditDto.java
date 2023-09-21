@@ -2,7 +2,6 @@ package com.bank.transfer.dto;
 
 import lombok.Builder;
 import lombok.Data;
-
 import java.sql.Timestamp;
 
 @Data

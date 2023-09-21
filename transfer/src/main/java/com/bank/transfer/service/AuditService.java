@@ -1,7 +1,6 @@
 package com.bank.transfer.service;
 
 import com.bank.transfer.dto.AuditDto;
-
 import java.util.List;
 
 public interface AuditService {
@@ -15,5 +14,4 @@ public interface AuditService {
     void updateTransferAudit(Long id, AuditDto auditDto);
 
     void deleteTransferAudit(Long id);
-
 }

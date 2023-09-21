@@ -1,9 +1,7 @@
 package com.bank.transfer.service;
 
 import com.bank.transfer.dto.AccountTransferDto;
-
 import java.util.List;
-
 
 public interface AccountTransferService {
     List<AccountTransferDto> findAllAccountTransfers();
@@ -15,5 +13,4 @@ public interface AccountTransferService {
     void updateAccountTransfer(Long id, AccountTransferDto transferDto);
 
     void deleteAccountTransfer(Long id);
-
 }

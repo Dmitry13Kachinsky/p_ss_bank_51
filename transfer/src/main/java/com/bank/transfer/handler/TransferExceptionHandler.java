@@ -16,7 +16,6 @@ public class TransferExceptionHandler {
                 transferNotFoundException.getMessage(),
                 transferNotFoundException.getCause(),
                 HttpStatus.MULTI_STATUS);
-
         return new ResponseEntity<>(transferException, transferException.getHttpStatus());
 
     }
