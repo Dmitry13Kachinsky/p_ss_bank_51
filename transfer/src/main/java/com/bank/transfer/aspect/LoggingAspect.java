@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class LoggingAspect extends AspectPointcut {
 
-
     @Before("accountTransferMethods()")
     public void beforeAccountTransfersMethodsLoggingAdvice(JoinPoint joinPoint) {
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();

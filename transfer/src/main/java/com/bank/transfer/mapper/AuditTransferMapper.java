@@ -18,7 +18,6 @@ public class AuditTransferMapper {
                 .newEntityJson(auditDto.getNewEntityJson())
                 .entityJson(auditDto.getEntityJson())
                 .build();
-
     }
 
     public static AuditDto mapToAuditDto(Audit audit) {

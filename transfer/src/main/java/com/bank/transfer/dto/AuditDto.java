@@ -10,18 +10,11 @@ import java.sql.Timestamp;
 public class AuditDto {
 
     String entityType;
-
     String operationType;
-
     String createdBy;
-
     String modifiedBy;
-
     Timestamp createdAt;
-
     Timestamp modifiedAt;
-
     String newEntityJson;
-
     String entityJson;
 }

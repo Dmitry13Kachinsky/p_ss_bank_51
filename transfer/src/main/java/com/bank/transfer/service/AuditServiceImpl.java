@@ -25,7 +25,6 @@ public class AuditServiceImpl implements AuditService {
         this.auditTransferMapper = auditTransferMapper;
     }
 
-
     @Override
     public List<AuditDto> findAllTransfers() {
 
@@ -35,14 +34,14 @@ public class AuditServiceImpl implements AuditService {
 
     @Override
     public AuditDto findById(Long id) {
-        return auditTransferMapper.mapToAuditDto(auditRepository.findById(id).orElseThrow(()
+        return AuditTransferMapper.mapToAuditDto(auditRepository.findById(id).orElseThrow(()
                 -> new TransferNotFoundException("Note in Audit not found")));
     }
 
     @Override
     @Transactional
     public Long addTransferAudit(AuditDto auditDto) {
-        Audit audit = auditTransferMapper.mapToAudit(auditDto);
+        Audit audit = AuditTransferMapper.mapToAudit(auditDto);
         return auditRepository.save(audit).getId();
     }
 
@@ -52,7 +51,7 @@ public class AuditServiceImpl implements AuditService {
         if (auditRepository.findById(id) == null) {
             throw new TransferNotFoundException("Note in Audit not found");
         }
-        Audit audit = auditTransferMapper.mapToAudit(auditDto);
+        Audit audit = AuditTransferMapper.mapToAudit(auditDto);
         audit.setId(id);
         auditRepository.save(audit);
     }
@@ -64,7 +63,5 @@ public class AuditServiceImpl implements AuditService {
             throw new TransferNotFoundException("Such Account Transfer does not exist!");
         }
         auditRepository.deleteById(id);
-
     }
-
 }

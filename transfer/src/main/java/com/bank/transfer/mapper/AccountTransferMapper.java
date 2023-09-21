@@ -13,7 +13,6 @@ public class AccountTransferMapper {
                 .purpose(transferDto.getPurpose())
                 .accountDetailsId(transferDto.getAccountDetailsId())
                 .build();
-
     }
 
     public static AccountTransferDto mapToAccountTransferDto(AccountTransfer transfer) {

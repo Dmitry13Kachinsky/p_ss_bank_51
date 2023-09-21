@@ -15,7 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @RestController
-@RequestMapping("/card-transfers")
+@RequestMapping("/cardTransfers")
 @Tag(name = "Card transfers", description = "Contains all CRUD-methods for Card transfers")
 public class RestCardTransferController {
 

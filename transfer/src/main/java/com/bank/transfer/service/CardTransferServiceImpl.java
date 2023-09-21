@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 public class CardTransferServiceImpl implements CardTransferService {
 
     private final CardTransferRepository cardTransferRepository;
-
     private final CardTransferMapper cardTransferMapper;
 
     @Autowired
@@ -25,7 +24,6 @@ public class CardTransferServiceImpl implements CardTransferService {
         this.cardTransferRepository = cardTransferRepository;
         this.cardTransferMapper = cardTransferMapper;
     }
-
 
     @Override
     public List<CardTransferDto> findAllCardTransfers() {
@@ -36,15 +34,14 @@ public class CardTransferServiceImpl implements CardTransferService {
 
     @Override
     public CardTransferDto findById(Long id) {
-        return cardTransferMapper.mapToCardTransferDto(cardTransferRepository.findById(id)
-                .orElseThrow(()-> new TransferNotFoundException("Card Transfer not found!")));
-
+        return CardTransferMapper.mapToCardTransferDto(cardTransferRepository.findById(id)
+                .orElseThrow(() -> new TransferNotFoundException("Card Transfer not found!")));
     }
 
     @Override
     @Transactional
     public Long addCardTransfer(CardTransferDto transferDto) {
-        CardTransfer transfer = cardTransferMapper.mapToCardTransfer(transferDto);
+        CardTransfer transfer = CardTransferMapper.mapToCardTransfer(transferDto);
         return cardTransferRepository.save(transfer).getId();
     }
 
@@ -54,10 +51,9 @@ public class CardTransferServiceImpl implements CardTransferService {
         if (cardTransferRepository.findById(id) == null) {
             throw new TransferNotFoundException("Card Transfer not found");
         }
-        CardTransfer transfer = cardTransferMapper.mapToCardTransfer(transferDto);
+        CardTransfer transfer = CardTransferMapper.mapToCardTransfer(transferDto);
         transfer.setId(id);
         cardTransferRepository.save(transfer);
-
     }
 
     @Override
@@ -67,7 +63,5 @@ public class CardTransferServiceImpl implements CardTransferService {
             throw new TransferNotFoundException("Such card transfer does not exist");
         }
         cardTransferRepository.deleteById(id);
-
     }
-
 }

@@ -15,12 +15,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @RestController
-@RequestMapping("/transfers-audit")
+@RequestMapping("/transfersAudit")
 @Tag(name = "Audit of all transfers", description = "Contains all CRUD-methods for Audit transfers")
 public class RestTransfersAuditController {
 
     private final AuditService auditService;
-
     private final Logger logger = Logger.getLogger(RestAccountTransferController.class.getName());
 
     @Autowired
@@ -52,7 +51,7 @@ public class RestTransfersAuditController {
     @Operation(summary = "Shows Audit transfer by id")
     @ApiResponse(responseCode = "200", description = "Audit of transfer have been showed successful")
     @ApiResponse(responseCode = "404", description = "Bad request to get Audit of transfer by id")
-    public ResponseEntity<AuditDto> showEachTransfersAuditPost (@PathVariable Long id) {
+    public ResponseEntity<AuditDto> showEachTransfersAuditPost(@PathVariable Long id) {
         AuditDto audit = auditService.findById(id);
         logger.log(Level.INFO, "Transfer Audit post with id: " + id + " showed");
         return new ResponseEntity<>(audit, HttpStatus.OK);
@@ -62,7 +61,7 @@ public class RestTransfersAuditController {
     @Operation(summary = "Updates Audit of transfer by id")
     @ApiResponse(responseCode = "200", description = "Audit of transfer have been updated successful")
     @ApiResponse(responseCode = "404", description = "Bad request to update Audit of transfer by id")
-    public ResponseEntity<HttpStatus> updateTransferAuditPost (@PathVariable Long id, @RequestBody AuditDto auditDto) {
+    public ResponseEntity<HttpStatus> updateTransferAuditPost(@PathVariable Long id, @RequestBody AuditDto auditDto) {
         auditService.updateTransferAudit(id, auditDto);
         logger.log(Level.INFO, "Transfer Audit post with id: " + id + " successfully updated");
         return new ResponseEntity<>(HttpStatus.OK);
@@ -72,7 +71,7 @@ public class RestTransfersAuditController {
     @Operation(summary = "Deletes Audit of transfer by id")
     @ApiResponse(responseCode = "200", description = "Audit transfer have been deleted successful")
     @ApiResponse(responseCode = "404", description = "Bad request to delete Audit of transfer by id")
-    public ResponseEntity<HttpStatus> deleteTransferAuditPost (@PathVariable Long id) {
+    public ResponseEntity<HttpStatus> deleteTransferAuditPost(@PathVariable Long id) {
         auditService.deleteTransferAudit(id);
         logger.log(Level.INFO, "Transfer Audit post with id: " + id + " successfully deleted");
         return new ResponseEntity<>(HttpStatus.OK);

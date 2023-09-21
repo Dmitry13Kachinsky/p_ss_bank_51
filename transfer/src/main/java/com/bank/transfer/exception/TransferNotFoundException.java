@@ -1,7 +1,6 @@
 package com.bank.transfer.exception;
 
-
-public class TransferNotFoundException extends RuntimeException{
+public class TransferNotFoundException extends RuntimeException {
     public TransferNotFoundException(String message) {
         super(message);
     }

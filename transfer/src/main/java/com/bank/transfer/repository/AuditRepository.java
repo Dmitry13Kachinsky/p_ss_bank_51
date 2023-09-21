@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 @EnableJpaRepositories
 public interface AuditRepository extends JpaRepository<Audit, Long> {
-    void deleteById (Long id);
+    void deleteById(Long id);
 }

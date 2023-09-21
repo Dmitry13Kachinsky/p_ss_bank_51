@@ -25,13 +25,11 @@ public class AccountTransferServiceImpl implements AccountTransferService {
         this.accountTransferMapper = accountTransferMapper;
     }
 
-
     @Override
     @Transactional
     public Long addAccountTransfer(AccountTransferDto transferDto) {
-        AccountTransfer transfer = accountTransferMapper.mapToAccountTransfer(transferDto);
+        AccountTransfer transfer = AccountTransferMapper.mapToAccountTransfer(transferDto);
         return accountTransferRepository.save(transfer).getId();
-
     }
 
     @Override
@@ -46,8 +44,8 @@ public class AccountTransferServiceImpl implements AccountTransferService {
 
         return AccountTransferMapper.mapToAccountTransferDto(
                 accountTransferRepository.findById(id)
-                .orElseThrow(()
-                -> new TransferNotFoundException("Account Transfer not found")));
+                        .orElseThrow(()
+                                -> new TransferNotFoundException("Account Transfer not found")));
     }
 
     @Override
@@ -56,10 +54,9 @@ public class AccountTransferServiceImpl implements AccountTransferService {
         if (accountTransferRepository.findById(id) == null) {
             throw new TransferNotFoundException("Account Transfer not found");
         }
-        AccountTransfer transfer = accountTransferMapper.mapToAccountTransfer(transferDto);
+        AccountTransfer transfer = AccountTransferMapper.mapToAccountTransfer(transferDto);
         transfer.setId(id);
         accountTransferRepository.save(transfer);
-
     }
 
     @Override
@@ -69,7 +66,6 @@ public class AccountTransferServiceImpl implements AccountTransferService {
             throw new TransferNotFoundException("Such Account Transfer does not exist!");
         }
         accountTransferRepository.deleteById(id);
-
     }
 
 

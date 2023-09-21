@@ -8,6 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 @EnableJpaRepositories
 public interface AccountTransferRepository extends JpaRepository<AccountTransfer, Long> {
-
     void deleteById(Long id);
 }

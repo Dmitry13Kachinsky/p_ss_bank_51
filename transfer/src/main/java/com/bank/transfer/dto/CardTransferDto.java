@@ -7,10 +7,7 @@ import lombok.Data;
 @Builder
 public class CardTransferDto {
     Long cardNumber;
-
     Double amount;
-
     String purpose;
-
     Long accountDetailsId;
 }

@@ -1,7 +1,6 @@
 package com.bank.transfer.service;
 
 import com.bank.transfer.dto.PhoneTransferDto;
-import com.bank.transfer.entity.PhoneTransfer;
 
 import java.util.List;
 

@@ -35,25 +35,23 @@ public class PhoneTransferServiceImpl implements PhoneTransferService {
 
     public PhoneTransferDto findById(Long id) {
 
-        return phoneTransferMapper.mapToPhoneTransferDto(phoneTransferRepository.findById(id)
+        return PhoneTransferMapper.mapToPhoneTransferDto(phoneTransferRepository.findById(id)
                 .orElseThrow(() -> new TransferNotFoundException("Such phone transfer does not exist")));
-
     }
 
     @Override
     @Transactional
     public Long addPhoneTransfer(PhoneTransferDto transferDto) {
-        PhoneTransfer transfer = phoneTransferMapper.mapToPhoneTransfer(transferDto);
+        PhoneTransfer transfer = PhoneTransferMapper.mapToPhoneTransfer(transferDto);
         return phoneTransferRepository.save(transfer).getId();
     }
 
     @Override
     @Transactional
     public void updatePhoneTransfer(Long id, PhoneTransferDto transferDto) {
-        PhoneTransfer transfer = phoneTransferMapper.mapToPhoneTransfer(transferDto);
+        PhoneTransfer transfer = PhoneTransferMapper.mapToPhoneTransfer(transferDto);
         transfer.setId(id);
         phoneTransferRepository.save(transfer);
-
     }
 
     @Override
@@ -63,7 +61,5 @@ public class PhoneTransferServiceImpl implements PhoneTransferService {
             throw new TransferNotFoundException("Such phone transfer does not exist");
         }
         phoneTransferRepository.deleteById(id);
-
     }
-
 }

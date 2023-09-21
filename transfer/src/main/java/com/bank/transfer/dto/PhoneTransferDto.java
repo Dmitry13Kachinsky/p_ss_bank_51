@@ -8,10 +8,7 @@ import lombok.Data;
 public class PhoneTransferDto {
 
     Long phoneNumber;
-
     Double amount;
-
     String purpose;
-
     Long accountDetailsId;
 }

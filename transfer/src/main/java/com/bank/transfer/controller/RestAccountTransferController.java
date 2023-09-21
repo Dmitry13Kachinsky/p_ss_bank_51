@@ -15,11 +15,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @RestController
-@RequestMapping("/account-transfers")
+@RequestMapping("/accountTransfers")
 @Tag(name = "Account transfers", description = "Contains all CRUD-methods for Account transfers")
 public class RestAccountTransferController {
     private final AccountTransferService accountTransferService;
-
     private final Logger logger = Logger.getLogger(RestAccountTransferController.class.getName());
 
     @Autowired
@@ -38,7 +37,6 @@ public class RestAccountTransferController {
         logger.log(Level.INFO, "Got the list of Account transfers.");
         return new ResponseEntity<>(accountTransfers, HttpStatus.OK);
     }
-
 
     @PostMapping("/index")
     @Operation(summary = "Adds new Account transfer")

@@ -15,7 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @RestController
-@RequestMapping("/phone-transfers")
+@RequestMapping("/phoneTransfers")
 @Tag(name = "Phone transfers", description = "Contains all CRUD-methods for Phone transfers")
 public class RestPhoneTransferController {
 

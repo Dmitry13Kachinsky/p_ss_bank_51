@@ -4,7 +4,6 @@ import com.bank.transfer.dto.AuditDto;
 
 import java.util.List;
 
-
 public interface AuditService {
 
     List<AuditDto> findAllTransfers();
