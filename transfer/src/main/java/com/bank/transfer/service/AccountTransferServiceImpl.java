@@ -16,18 +16,18 @@ import java.util.stream.Collectors;
 public class AccountTransferServiceImpl implements AccountTransferService {
 
     private final AccountTransferRepository accountTransferRepository;
-    private final AccountTransferMapper accountTransferMapper;
+    private final AccountTransferMapper mapper;
 
     @Autowired
-    public AccountTransferServiceImpl(AccountTransferRepository accountTransferRepository, AccountTransferMapper accountTransferMapper) {
+    public AccountTransferServiceImpl(AccountTransferRepository accountTransferRepository) {
         this.accountTransferRepository = accountTransferRepository;
-        this.accountTransferMapper = accountTransferMapper;
+        this.mapper = AccountTransferMapper.INSTANCE;
     }
 
     @Override
     @Transactional
     public Long addAccountTransfer(AccountTransferDto transferDto) {
-        AccountTransfer transfer = AccountTransferMapper.mapToAccountTransfer(transferDto);
+        AccountTransfer transfer = mapper.mapToAccountTransfer(transferDto);
         return accountTransferRepository.save(transfer).getId();
     }
 
@@ -35,13 +35,13 @@ public class AccountTransferServiceImpl implements AccountTransferService {
     public List<AccountTransferDto> findAllAccountTransfers() {
 
         return accountTransferRepository.findAll().stream()
-                .map(AccountTransferMapper::mapToAccountTransferDto).collect(Collectors.toList());
+                .map(mapper::mapToAccountTransferDto).collect(Collectors.toList());
     }
 
     @Override
     public AccountTransferDto findById(Long id) {
 
-        return AccountTransferMapper.mapToAccountTransferDto(
+        return mapper.mapToAccountTransferDto(
                 accountTransferRepository.findById(id)
                         .orElseThrow(()
                                 -> new TransferNotFoundException("Account Transfer not found")));
@@ -53,7 +53,7 @@ public class AccountTransferServiceImpl implements AccountTransferService {
         if (accountTransferRepository.findById(id) == null) {
             throw new TransferNotFoundException("Account Transfer not found");
         }
-        AccountTransfer transfer = AccountTransferMapper.mapToAccountTransfer(transferDto);
+        AccountTransfer transfer = mapper.mapToAccountTransfer(transferDto);
         transfer.setId(id);
         accountTransferRepository.save(transfer);
     }

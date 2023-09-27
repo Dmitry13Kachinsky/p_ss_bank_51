@@ -16,39 +16,39 @@ import java.util.stream.Collectors;
 public class PhoneTransferServiceImpl implements PhoneTransferService {
 
     private final PhoneTransferRepository phoneTransferRepository;
-    private final PhoneTransferMapper phoneTransferMapper;
+    private final PhoneTransferMapper mapper;
 
 
     @Autowired
-    public PhoneTransferServiceImpl(PhoneTransferRepository phoneTransferRepository, PhoneTransferMapper phoneTransferMapper) {
+    public PhoneTransferServiceImpl(PhoneTransferRepository phoneTransferRepository) {
         this.phoneTransferRepository = phoneTransferRepository;
-        this.phoneTransferMapper = phoneTransferMapper;
+        this.mapper = PhoneTransferMapper.INSTANCE;
     }
 
     @Override
     public List<PhoneTransferDto> findAllPhoneTransfers() {
 
         return phoneTransferRepository.findAll().stream()
-                .map(PhoneTransferMapper::mapToPhoneTransferDto).collect(Collectors.toList());
+                .map(mapper::mapToPhoneTransferDto).collect(Collectors.toList());
     }
 
     public PhoneTransferDto findById(Long id) {
 
-        return PhoneTransferMapper.mapToPhoneTransferDto(phoneTransferRepository.findById(id)
+        return mapper.mapToPhoneTransferDto(phoneTransferRepository.findById(id)
                 .orElseThrow(() -> new TransferNotFoundException("Such phone transfer does not exist")));
     }
 
     @Override
     @Transactional
     public Long addPhoneTransfer(PhoneTransferDto transferDto) {
-        PhoneTransfer transfer = PhoneTransferMapper.mapToPhoneTransfer(transferDto);
+        PhoneTransfer transfer = mapper.mapToPhoneTransfer(transferDto);
         return phoneTransferRepository.save(transfer).getId();
     }
 
     @Override
     @Transactional
     public void updatePhoneTransfer(Long id, PhoneTransferDto transferDto) {
-        PhoneTransfer transfer = PhoneTransferMapper.mapToPhoneTransfer(transferDto);
+        PhoneTransfer transfer = mapper.mapToPhoneTransfer(transferDto);
         transfer.setId(id);
         phoneTransferRepository.save(transfer);
     }

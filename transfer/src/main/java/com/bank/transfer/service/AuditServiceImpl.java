@@ -16,31 +16,31 @@ import java.util.stream.Collectors;
 public class AuditServiceImpl implements AuditService {
 
     private final AuditRepository auditRepository;
-    private final AuditTransferMapper auditTransferMapper;
+    private final AuditTransferMapper mapper;
 
     @Autowired
-    public AuditServiceImpl(AuditRepository auditRepository, AuditTransferMapper auditTransferMapper) {
+    public AuditServiceImpl(AuditRepository auditRepository) {
         this.auditRepository = auditRepository;
-        this.auditTransferMapper = auditTransferMapper;
+        this.mapper = AuditTransferMapper.INSTANCE;
     }
 
     @Override
     public List<AuditDto> findAllTransfers() {
 
-        return auditRepository.findAll().stream().map(AuditTransferMapper::mapToAuditDto)
+        return auditRepository.findAll().stream().map(mapper::mapToAuditDto)
                 .collect(Collectors.toList());
     }
 
     @Override
     public AuditDto findById(Long id) {
-        return AuditTransferMapper.mapToAuditDto(auditRepository.findById(id).orElseThrow(()
+        return mapper.mapToAuditDto(auditRepository.findById(id).orElseThrow(()
                 -> new TransferNotFoundException("Note in Audit not found")));
     }
 
     @Override
     @Transactional
     public Long addTransferAudit(AuditDto auditDto) {
-        Audit audit = AuditTransferMapper.mapToAudit(auditDto);
+        Audit audit = mapper.mapToAudit(auditDto);
         return auditRepository.save(audit).getId();
     }
 
@@ -50,7 +50,7 @@ public class AuditServiceImpl implements AuditService {
         if (auditRepository.findById(id) == null) {
             throw new TransferNotFoundException("Note in Audit not found");
         }
-        Audit audit = AuditTransferMapper.mapToAudit(auditDto);
+        Audit audit = mapper.mapToAudit(auditDto);
         audit.setId(id);
         auditRepository.save(audit);
     }

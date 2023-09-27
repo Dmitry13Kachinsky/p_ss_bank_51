@@ -16,31 +16,31 @@ import java.util.stream.Collectors;
 public class CardTransferServiceImpl implements CardTransferService {
 
     private final CardTransferRepository cardTransferRepository;
-    private final CardTransferMapper cardTransferMapper;
+    private final CardTransferMapper mapper;
 
     @Autowired
-    public CardTransferServiceImpl(CardTransferRepository cardTransferRepository, CardTransferMapper cardTransferMapper) {
+    public CardTransferServiceImpl(CardTransferRepository cardTransferRepository) {
         this.cardTransferRepository = cardTransferRepository;
-        this.cardTransferMapper = cardTransferMapper;
+        this.mapper = CardTransferMapper.INSTANCE;
     }
 
     @Override
     public List<CardTransferDto> findAllCardTransfers() {
 
         return cardTransferRepository.findAll().stream()
-                .map(CardTransferMapper::mapToCardTransferDto).collect(Collectors.toList());
+                .map(mapper::mapToCardTransferDto).collect(Collectors.toList());
     }
 
     @Override
     public CardTransferDto findById(Long id) {
-        return CardTransferMapper.mapToCardTransferDto(cardTransferRepository.findById(id)
+        return mapper.mapToCardTransferDto(cardTransferRepository.findById(id)
                 .orElseThrow(() -> new TransferNotFoundException("Card Transfer not found!")));
     }
 
     @Override
     @Transactional
     public Long addCardTransfer(CardTransferDto transferDto) {
-        CardTransfer transfer = CardTransferMapper.mapToCardTransfer(transferDto);
+        CardTransfer transfer = mapper.mapToCardTransfer(transferDto);
         return cardTransferRepository.save(transfer).getId();
     }
 
@@ -50,7 +50,7 @@ public class CardTransferServiceImpl implements CardTransferService {
         if (cardTransferRepository.findById(id) == null) {
             throw new TransferNotFoundException("Card Transfer not found");
         }
-        CardTransfer transfer = CardTransferMapper.mapToCardTransfer(transferDto);
+        CardTransfer transfer = mapper.mapToCardTransfer(transferDto);
         transfer.setId(id);
         cardTransferRepository.save(transfer);
     }
