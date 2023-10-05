@@ -47,7 +47,7 @@ public class AuditServiceImpl implements AuditService {
     @Override
     @Transactional
     public void updateTransferAudit(Long id, AuditDto auditDto) {
-        if (auditRepository.findById(id) == null) {
+        if (auditRepository.findById(id).isEmpty()) {
             throw new TransferNotFoundException("Note in Audit not found");
         }
         Audit audit = mapper.mapToAudit(auditDto);
@@ -58,7 +58,7 @@ public class AuditServiceImpl implements AuditService {
     @Override
     @Transactional
     public void deleteTransferAudit(Long id) {
-        if (auditRepository.findById(id) == null) {
+        if (auditRepository.findById(id).isEmpty()) {
             throw new TransferNotFoundException("Such Account Transfer does not exist!");
         }
         auditRepository.deleteById(id);

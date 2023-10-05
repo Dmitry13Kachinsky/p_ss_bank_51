@@ -47,7 +47,7 @@ public class CardTransferServiceImpl implements CardTransferService {
     @Override
     @Transactional
     public void updateCardTransfer(Long id, CardTransferDto transferDto) {
-        if (cardTransferRepository.findById(id) == null) {
+        if (cardTransferRepository.findById(id).isEmpty()) {
             throw new TransferNotFoundException("Card Transfer not found");
         }
         CardTransfer transfer = mapper.mapToCardTransfer(transferDto);
@@ -58,7 +58,7 @@ public class CardTransferServiceImpl implements CardTransferService {
     @Override
     @Transactional
     public void deleteCardTransfer(Long id) {
-        if (cardTransferRepository.findById(id) == null) {
+        if (cardTransferRepository.findById(id).isEmpty()) {
             throw new TransferNotFoundException("Such card transfer does not exist");
         }
         cardTransferRepository.deleteById(id);

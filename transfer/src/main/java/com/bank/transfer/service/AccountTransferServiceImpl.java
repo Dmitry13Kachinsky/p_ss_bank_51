@@ -50,7 +50,7 @@ public class AccountTransferServiceImpl implements AccountTransferService {
     @Override
     @Transactional
     public void updateAccountTransfer(Long id, AccountTransferDto transferDto) {
-        if (accountTransferRepository.findById(id) == null) {
+        if (accountTransferRepository.findById(id).isEmpty()) {
             throw new TransferNotFoundException("Account Transfer not found");
         }
         AccountTransfer transfer = mapper.mapToAccountTransfer(transferDto);
@@ -61,7 +61,7 @@ public class AccountTransferServiceImpl implements AccountTransferService {
     @Override
     @Transactional
     public void deleteAccountTransfer(Long id) {
-        if (accountTransferRepository.findById(id) == null) {
+        if (accountTransferRepository.findById(id).isEmpty()) {
             throw new TransferNotFoundException("Such Account Transfer does not exist!");
         }
         accountTransferRepository.deleteById(id);

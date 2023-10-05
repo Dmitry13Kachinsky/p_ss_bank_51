@@ -48,6 +48,9 @@ public class PhoneTransferServiceImpl implements PhoneTransferService {
     @Override
     @Transactional
     public void updatePhoneTransfer(Long id, PhoneTransferDto transferDto) {
+        if (phoneTransferRepository.findById(id).isEmpty()) {
+            throw new TransferNotFoundException("Phone Transfer not found");
+        }
         PhoneTransfer transfer = mapper.mapToPhoneTransfer(transferDto);
         transfer.setId(id);
         phoneTransferRepository.save(transfer);
@@ -56,7 +59,7 @@ public class PhoneTransferServiceImpl implements PhoneTransferService {
     @Override
     @Transactional
     public void deletePhoneTransfer(Long id) {
-        if (phoneTransferRepository.findById(id) == null) {
+        if (phoneTransferRepository.findById(id).isEmpty()) {
             throw new TransferNotFoundException("Such phone transfer does not exist");
         }
         phoneTransferRepository.deleteById(id);
