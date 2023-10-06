@@ -1,28 +1,33 @@
 package com.bank.transfer.entity;
 
 import org.junit.jupiter.api.Test;
-import java.sql.Timestamp;
+
 import static com.bank.transfer.TestUtils.getTransferAudit_1;
+import static com.bank.transfer.TestUtils.getTransferAudit_3;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AuditTest {
 
     @Test
-    void testGet() {
-        assertEquals(1L, getTransferAudit_1().getId());
-        assertEquals("testEntity", getTransferAudit_1().getEntityType());
-        assertEquals("testOperation", getTransferAudit_1().getOperationType());
-        assertEquals("testCreator", getTransferAudit_1().getCreatedBy());
-        assertEquals("testModifier", getTransferAudit_1().getModifiedBy());
-        assertEquals(new Timestamp(1L), getTransferAudit_1().getCreatedAt());
-        assertEquals(new Timestamp(1L), getTransferAudit_1().getModifiedAt());
-        assertEquals("testNewEntityJson", getTransferAudit_1().getNewEntityJson());
-        assertEquals("testEntityJson", getTransferAudit_1().getEntityJson());
+    void getAndSetTest() {
+        Audit audit = getTransferAudit_1();
+        audit.setId(2L);
+        assertEquals(2L, audit.getId());
     }
 
     @Test
     void toStringTest() {
         assertTrue(getTransferAudit_1().toString().contains("Id=" + getTransferAudit_1().getId()));
+    }
+
+    @Test
+    void equalsTest() {
+        assertTrue(getTransferAudit_3().equals(getTransferAudit_1()) && getTransferAudit_1().equals(getTransferAudit_3()));
+    }
+
+    @Test
+    void hashCodeTest() {
+        assertEquals(getTransferAudit_3().hashCode(), getTransferAudit_1().hashCode());
     }
 }

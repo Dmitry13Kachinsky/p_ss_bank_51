@@ -42,6 +42,15 @@ public class TestUtils {
         return transfer;
     }
 
+    public static AccountTransfer getAccountTransferWithNoArgsConstructor_1() {
+        return new AccountTransfer();
+    }
+
+    public static AccountTransfer getAccountTransferWithNoArgsConstructor_2() {
+        AccountTransfer transfer = getAccountTransferWithNoArgsConstructor_1();
+        return transfer;
+    }
+
     public static AccountTransfer getAccountTransfer_2() {
         AccountTransfer transfer = getAccountTransferWithoutId_2();
         transfer.setId(2L);
@@ -57,12 +66,22 @@ public class TestUtils {
         return AccountTransferMapper.INSTANCE.mapToAccountTransferDto(getAccountTransfer_2());
     }
 
+    public static AccountTransferDto getAccountTransferDto_3() {
+        return AccountTransferMapper.INSTANCE.mapToAccountTransferDto(getAccountTransfer_1());
+    }
+
     public static List<AccountTransfer> getListOfAccountTransfers() {
         return List.of(getAccountTransfer_1(), getAccountTransfer_2());
     }
 
     public static List<AccountTransferDto> getListOfAccountTransfersDto() {
         return List.of(getAccountTransferDto_1(), getAccountTransferDto_2());
+    }
+
+    public static AccountTransfer getAccountTransfer_3() {
+        AccountTransfer transfer = getAccountTransferWithoutId_1();
+        transfer.setId(1L);
+        return transfer;
     }
 
     public static Audit getTransferAuditWithoutId_1() {
@@ -112,12 +131,31 @@ public class TestUtils {
         return AuditTransferMapper.INSTANCE.mapToAuditDto(getTransferAudit_2());
     }
 
+    public static AuditDto getTransferAuditDto_3() {
+        return AuditTransferMapper.INSTANCE.mapToAuditDto(getTransferAudit_1());
+    }
+
+    public static Audit getTransferAuditWithNoArgsConstructor_1() {
+        return new Audit();
+    }
+
+    public static Audit getTransferAuditWithNoArgsConstructor_2() {
+        Audit audit = getTransferAuditWithNoArgsConstructor_1();
+        return audit;
+    }
+
     public static List<Audit> getListOfTransfersAudit() {
         return List.of(getTransferAudit_1(), getTransferAudit_2());
     }
 
     public static List<AuditDto> getListOfTransfersAuditDto() {
         return List.of(getTransferAuditDto_1(), getTransferAuditDto_2());
+    }
+
+    public static Audit getTransferAudit_3() {
+        Audit audit = getTransferAudit_1();
+        audit.setId(1L);
+        return audit;
     }
 
     public static CardTransfer getCardTransferWithoutId_1() {
@@ -150,6 +188,12 @@ public class TestUtils {
         return transfer;
     }
 
+    public static CardTransfer getCardTransfer_3() {
+        CardTransfer transfer = getCardTransferWithoutId_1();
+        transfer.setId(1L);
+        return transfer;
+    }
+
     public static CardTransferDto getCardTransferDto_1() {
 
         return CardTransferMapper.INSTANCE.mapToCardTransferDto(getCardTransfer_1());
@@ -157,6 +201,10 @@ public class TestUtils {
 
     public static CardTransferDto getCardTransferDto_2() {
         return CardTransferMapper.INSTANCE.mapToCardTransferDto(getCardTransfer_2());
+    }
+
+    public static CardTransferDto getCardTransferDto_3() {
+        return CardTransferMapper.INSTANCE.mapToCardTransferDto(getCardTransfer_1());
     }
 
     public static List<CardTransfer> getListOfCardTransfers() {
@@ -198,6 +246,12 @@ public class TestUtils {
         return transfer;
     }
 
+    public static PhoneTransfer getPhoneTransfer_3() {
+        PhoneTransfer transfer = getPhoneTransferWithoutId_1();
+        transfer.setId(1L);
+        return transfer;
+    }
+
     public static PhoneTransferDto getPhoneTransferDto_1() {
 
         return PhoneTransferMapper.INSTANCE.mapToPhoneTransferDto(getPhoneTransfer_1());
@@ -205,6 +259,10 @@ public class TestUtils {
 
     public static PhoneTransferDto getPhoneTransferDto_2() {
         return PhoneTransferMapper.INSTANCE.mapToPhoneTransferDto(getPhoneTransfer_2());
+    }
+
+    public static PhoneTransferDto getPhoneTransferDto_3() {
+        return PhoneTransferMapper.INSTANCE.mapToPhoneTransferDto(getPhoneTransfer_1());
     }
 
     public static List<PhoneTransfer> getListOfPhoneTransfers() {
@@ -215,4 +273,3 @@ public class TestUtils {
         return List.of(getPhoneTransferDto_1(), getPhoneTransferDto_2());
     }
 }
-
