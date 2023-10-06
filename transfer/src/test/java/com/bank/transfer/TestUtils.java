@@ -1,4 +1,4 @@
-package com.bank.transfer.service.com.bank.transfer;
+package com.bank.transfer;
 
 import com.bank.transfer.dto.AccountTransferDto;
 import com.bank.transfer.dto.AuditDto;
