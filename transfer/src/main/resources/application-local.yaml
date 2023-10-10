@@ -12,6 +12,13 @@ management:
     web:
       exposure:
         include: '*'
+
+
+  metrics:
+    tags:
+      application=${spring:
+        application:
+          name}:
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
